@@ -1,475 +1,1411 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Assistly — AI-Powered Business Assistant</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', sans-serif; background: #f1f5f9; padding: 32px 16px; color: #1e293b; }
-  .brochure { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 3px; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assistly — AI-Powered Business Assistant</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f1f5f9;
+        padding: 32px 16px;
+        color: #1e293b;
+      }
+      .brochure {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
 
-  /* COVER */
-  .cover {
-    background: linear-gradient(135deg, #0f1d3a 0%, #1a2f6e 45%, #2d1b69 100%);
-    padding: 56px 48px 48px; position: relative; overflow: hidden; border-radius: 16px;
-  }
-  .cover-bg-orb {
-    position: absolute; border-radius: 50%;
-    background: radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 70%);
-  }
-  .cover-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 100px; padding: 6px 14px; font-size: 12px; color: #a5b4fc;
-    font-weight: 500; margin-bottom: 28px; position: relative;
-  }
-  .cover-dot { width: 7px; height: 7px; border-radius: 50%; background: #34d399; display: inline-block; }
-  .cover-title {
-    font-size: clamp(28px, 5vw, 46px); font-weight: 800; color: #fff;
-    line-height: 1.1; margin-bottom: 12px; position: relative; letter-spacing: -0.5px;
-  }
-  .cover-title span { background: linear-gradient(90deg, #a78bfa, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .cover-tagline { font-size: 18px; color: #94a3b8; font-weight: 400; margin-bottom: 36px; position: relative; line-height: 1.5; }
-  .cover-tagline strong { color: #e2e8f0; font-weight: 500; }
-  .cover-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; position: relative; }
-  .cover-pill {
-    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 100px; padding: 6px 14px; font-size: 12px; color: #cbd5e1;
-  }
-  .cover-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
-  .cover-chat-mockup {
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 16px; padding: 20px; position: relative; min-width: 260px; max-width: 320px;
-  }
-  .chat-header {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
-    padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .chat-avatar {
-    width: 36px; height: 36px; border-radius: 10px;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .chat-name { font-size: 13px; font-weight: 600; color: #e2e8f0; }
-  .chat-status { font-size: 11px; color: #34d399; }
-  .chat-bubble { border-radius: 12px; padding: 10px 14px; font-size: 12px; line-height: 1.5; margin-bottom: 8px; max-width: 90%; }
-  .chat-bot { background: rgba(99,102,241,0.25); color: #e2e8f0; border-radius: 4px 12px 12px 12px; }
-  .chat-user { background: rgba(255,255,255,0.1); color: #cbd5e1; margin-left: auto; border-radius: 12px 4px 12px 12px; }
-  .chat-slots { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-  .chat-slot {
-    background: rgba(99,102,241,0.3); border: 1px solid rgba(99,102,241,0.5);
-    border-radius: 8px; padding: 6px 10px; font-size: 11px; color: #a5b4fc;
-  }
-  .chat-slot.selected { background: rgba(99,102,241,0.6); color: #fff; }
+      /* COVER */
+      .cover {
+        background: linear-gradient(
+          135deg,
+          #0f1d3a 0%,
+          #1a2f6e 45%,
+          #2d1b69 100%
+        );
+        padding: 56px 48px 48px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+      }
+      .cover-bg-orb {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(99, 102, 241, 0.3) 0%,
+          transparent 70%
+        );
+      }
+      .cover-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 100px;
+        padding: 6px 14px;
+        font-size: 12px;
+        color: #a5b4fc;
+        font-weight: 500;
+        margin-bottom: 28px;
+        position: relative;
+      }
+      .cover-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #34d399;
+        display: inline-block;
+      }
+      .cover-title {
+        font-size: clamp(28px, 5vw, 46px);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.1;
+        margin-bottom: 12px;
+        position: relative;
+        letter-spacing: -0.5px;
+      }
+      .cover-title span {
+        background: linear-gradient(90deg, #a78bfa, #38bdf8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .cover-tagline {
+        font-size: 18px;
+        color: #94a3b8;
+        font-weight: 400;
+        margin-bottom: 36px;
+        position: relative;
+        line-height: 1.5;
+      }
+      .cover-tagline strong {
+        color: #e2e8f0;
+        font-weight: 500;
+      }
+      .cover-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 40px;
+        position: relative;
+      }
+      .cover-pill {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 100px;
+        padding: 6px 14px;
+        font-size: 12px;
+        color: #cbd5e1;
+      }
+      .cover-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 40px;
+        align-items: center;
+      }
+      .cover-chat-mockup {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        padding: 20px;
+        position: relative;
+        min-width: 260px;
+        max-width: 320px;
+      }
+      .chat-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .chat-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .chat-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: #e2e8f0;
+      }
+      .chat-status {
+        font-size: 11px;
+        color: #34d399;
+      }
+      .chat-bubble {
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 12px;
+        line-height: 1.5;
+        margin-bottom: 8px;
+        max-width: 90%;
+      }
+      .chat-bot {
+        background: rgba(99, 102, 241, 0.25);
+        color: #e2e8f0;
+        border-radius: 4px 12px 12px 12px;
+      }
+      .chat-user {
+        background: rgba(255, 255, 255, 0.1);
+        color: #cbd5e1;
+        margin-left: auto;
+        border-radius: 12px 4px 12px 12px;
+      }
+      .chat-slots {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .chat-slot {
+        background: rgba(99, 102, 241, 0.3);
+        border: 1px solid rgba(99, 102, 241, 0.5);
+        border-radius: 8px;
+        padding: 6px 10px;
+        font-size: 11px;
+        color: #a5b4fc;
+      }
+      .chat-slot.selected {
+        background: rgba(99, 102, 241, 0.6);
+        color: #fff;
+      }
 
-  /* INTRO */
-  .intro-band {
-    background: #f8faff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 40px 48px;
-  }
-  .section-eyebrow {
-    font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
-    color: #6366f1; margin-bottom: 12px;
-  }
-  .section-heading { font-size: 28px; font-weight: 700; color: #0f172a; margin-bottom: 16px; line-height: 1.2; }
-  .section-heading em { font-style: normal; color: #6366f1; }
-  .section-body { font-size: 15px; color: #475569; line-height: 1.7; max-width: 640px; }
-  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
-  .stat-box {
-    text-align: center; padding: 20px; background: #fff;
-    border-radius: 12px; border: 1px solid #e8edf8;
-  }
-  .stat-num { font-size: 28px; font-weight: 800; color: #6366f1; }
-  .stat-label { font-size: 12px; color: #64748b; margin-top: 4px; }
+      /* INTRO */
+      .intro-band {
+        background: #f8faff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 40px 48px;
+      }
+      .section-eyebrow {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #6366f1;
+        margin-bottom: 12px;
+      }
+      .section-heading {
+        font-size: 28px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 16px;
+        line-height: 1.2;
+      }
+      .section-heading em {
+        font-style: normal;
+        color: #6366f1;
+      }
+      .section-body {
+        font-size: 15px;
+        color: #475569;
+        line-height: 1.7;
+        max-width: 640px;
+      }
+      .stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 28px;
+      }
+      .stat-box {
+        text-align: center;
+        padding: 20px;
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid #e8edf8;
+      }
+      .stat-num {
+        font-size: 28px;
+        font-weight: 800;
+        color: #6366f1;
+      }
+      .stat-label {
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 4px;
+      }
 
-  /* FEATURES */
-  .features-section {
-    background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 40px 48px;
-  }
-  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 28px; }
-  .feature-card { background: #f8faff; border: 1px solid #e8edf8; border-radius: 14px; padding: 20px; }
-  .feature-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 12px; }
-  .icon-purple { background: #ede9fe; }
-  .icon-blue { background: #dbeafe; }
-  .icon-teal { background: #ccfbf1; }
-  .icon-amber { background: #fef3c7; }
-  .icon-rose { background: #ffe4e6; }
-  .feature-title { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 6px; }
-  .feature-desc { font-size: 12px; color: #64748b; line-height: 1.6; }
+      /* FEATURES */
+      .features-section {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 40px 48px;
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+      .feature-card {
+        background: #f8faff;
+        border: 1px solid #e8edf8;
+        border-radius: 14px;
+        padding: 20px;
+      }
+      .feature-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        margin-bottom: 12px;
+      }
+      .icon-purple {
+        background: #ede9fe;
+      }
+      .icon-blue {
+        background: #dbeafe;
+      }
+      .icon-teal {
+        background: #ccfbf1;
+      }
+      .icon-amber {
+        background: #fef3c7;
+      }
+      .icon-rose {
+        background: #ffe4e6;
+      }
+      .feature-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 6px;
+      }
+      .feature-desc {
+        font-size: 12px;
+        color: #64748b;
+        line-height: 1.6;
+      }
 
-  /* HOW IT WORKS */
-  .how-section {
-    background: linear-gradient(135deg, #0f1d3a 0%, #1e2d6e 100%);
-    border-radius: 16px; padding: 40px 48px;
-  }
-  .how-eyebrow { color: #818cf8; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
-  .how-heading { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 32px; }
-  .steps-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
-  .step { position: relative; padding-right: 8px; }
-  .step-num {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 10px;
-  }
-  .step-title { font-size: 11px; font-weight: 600; color: #e2e8f0; margin-bottom: 4px; }
-  .step-desc { font-size: 10px; color: #94a3b8; line-height: 1.5; }
+      /* HOW IT WORKS */
+      .how-section {
+        background: linear-gradient(135deg, #0f1d3a 0%, #1e2d6e 100%);
+        border-radius: 16px;
+        padding: 40px 48px;
+      }
+      .how-eyebrow {
+        color: #818cf8;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+      .how-heading {
+        font-size: 28px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 32px;
+      }
+      .steps-row {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+      }
+      .step {
+        position: relative;
+        padding-right: 8px;
+      }
+      .step-num {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .step-title {
+        font-size: 11px;
+        font-weight: 600;
+        color: #e2e8f0;
+        margin-bottom: 4px;
+      }
+      .step-desc {
+        font-size: 10px;
+        color: #94a3b8;
+        line-height: 1.5;
+      }
 
-  /* BENEFITS */
-  .benefits-section { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
-  .benefit-left { background: #f0f4ff; border: 1px solid #dde5f7; border-radius: 16px 2px 2px 16px; padding: 36px 40px; }
-  .benefit-right { background: #fff; border: 1px solid #e2e8f0; border-radius: 2px 16px 16px 2px; padding: 36px 40px; }
-  .benefit-heading { font-size: 20px; font-weight: 700; color: #1e293b; line-height: 1.3; margin-top: 8px; margin-bottom: 16px; }
-  .benefit-list { list-style: none; }
-  .benefit-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #334155; line-height: 1.5; margin-bottom: 10px; }
-  .benefit-check { color: #6366f1; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+      /* BENEFITS */
+      .benefits-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3px;
+      }
+      .benefit-left {
+        background: #f0f4ff;
+        border: 1px solid #dde5f7;
+        border-radius: 16px 2px 2px 16px;
+        padding: 36px 40px;
+      }
+      .benefit-right {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 2px 16px 16px 2px;
+        padding: 36px 40px;
+      }
+      .benefit-heading {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.3;
+        margin-top: 8px;
+        margin-bottom: 16px;
+      }
+      .benefit-list {
+        list-style: none;
+      }
+      .benefit-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        color: #334155;
+        line-height: 1.5;
+        margin-bottom: 10px;
+      }
+      .benefit-check {
+        color: #6366f1;
+        font-size: 14px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
 
-  /* DASHBOARD */
-  .dashboard-section { background: #0f172a; border-radius: 16px; padding: 40px 48px; }
-  .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
-  .dashboard-eyebrow { color: #38bdf8; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
-  .dashboard-heading { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 16px; }
-  .dash-point { font-size: 13px; color: #94a3b8; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-  .dash-point span { color: #6366f1; }
-  .dash-mockup { background: #1e293b; border: 1px solid #334155; border-radius: 14px; overflow: hidden; }
-  .dash-topbar { background: #0f172a; padding: 12px 20px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #1e293b; }
-  .dash-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .dash-title-bar { font-size: 12px; color: #64748b; font-weight: 500; margin-left: 4px; }
-  .dash-content { display: grid; grid-template-columns: 180px 1fr; min-height: 200px; }
-  .dash-sidebar { background: #0f172a; padding: 16px; border-right: 1px solid #1e293b; }
-  .dash-nav-item { padding: 8px 12px; border-radius: 8px; font-size: 11px; color: #94a3b8; margin-bottom: 4px; }
-  .dash-nav-item.active { background: rgba(99,102,241,0.2); color: #a5b4fc; font-weight: 500; }
-  .dash-main { padding: 16px; }
-  .dash-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
-  .dash-stat { background: #0f172a; border: 1px solid #1e3a5f; border-radius: 10px; padding: 12px; text-align: center; }
-  .dash-stat-num { font-size: 20px; font-weight: 700; color: #38bdf8; }
-  .dash-stat-label { font-size: 10px; color: #64748b; margin-top: 2px; }
-  .dash-appt-row {
-    display: flex; align-items: center; justify-content: space-between;
-    background: #0f172a; border: 1px solid #1e293b; border-radius: 8px;
-    padding: 8px 12px; margin-bottom: 6px; font-size: 11px;
-  }
-  .dash-appt-name { color: #e2e8f0; font-weight: 500; }
-  .dash-appt-time { color: #64748b; font-size: 10px; margin-top: 2px; }
-  .dash-badge { border-radius: 100px; padding: 3px 8px; font-size: 10px; font-weight: 600; }
-  .badge-confirmed { background: rgba(52,211,153,0.15); color: #34d399; }
-  .badge-pending { background: rgba(251,191,36,0.15); color: #fbbf24; }
+      /* DASHBOARD */
+      .dashboard-section {
+        background: #0f172a;
+        border-radius: 16px;
+        padding: 40px 48px;
+      }
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+        align-items: center;
+      }
+      .dashboard-eyebrow {
+        color: #38bdf8;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+      .dashboard-heading {
+        font-size: 26px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 16px;
+      }
+      .dash-point {
+        font-size: 13px;
+        color: #94a3b8;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .dash-point span {
+        color: #6366f1;
+      }
+      .dash-mockup {
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .dash-topbar {
+        background: #0f172a;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid #1e293b;
+      }
+      .dash-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .dash-title-bar {
+        font-size: 12px;
+        color: #64748b;
+        font-weight: 500;
+        margin-left: 4px;
+      }
+      .dash-content {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        min-height: 200px;
+      }
+      .dash-sidebar {
+        background: #0f172a;
+        padding: 16px;
+        border-right: 1px solid #1e293b;
+      }
+      .dash-nav-item {
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 11px;
+        color: #94a3b8;
+        margin-bottom: 4px;
+      }
+      .dash-nav-item.active {
+        background: rgba(99, 102, 241, 0.2);
+        color: #a5b4fc;
+        font-weight: 500;
+      }
+      .dash-main {
+        padding: 16px;
+      }
+      .dash-stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .dash-stat {
+        background: #0f172a;
+        border: 1px solid #1e3a5f;
+        border-radius: 10px;
+        padding: 12px;
+        text-align: center;
+      }
+      .dash-stat-num {
+        font-size: 20px;
+        font-weight: 700;
+        color: #38bdf8;
+      }
+      .dash-stat-label {
+        font-size: 10px;
+        color: #64748b;
+        margin-top: 2px;
+      }
+      .dash-appt-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #0f172a;
+        border: 1px solid #1e293b;
+        border-radius: 8px;
+        padding: 8px 12px;
+        margin-bottom: 6px;
+        font-size: 11px;
+      }
+      .dash-appt-name {
+        color: #e2e8f0;
+        font-weight: 500;
+      }
+      .dash-appt-time {
+        color: #64748b;
+        font-size: 10px;
+        margin-top: 2px;
+      }
+      .dash-badge {
+        border-radius: 100px;
+        padding: 3px 8px;
+        font-size: 10px;
+        font-weight: 600;
+      }
+      .badge-confirmed {
+        background: rgba(52, 211, 153, 0.15);
+        color: #34d399;
+      }
+      .badge-pending {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+      }
 
-  /* USE CASES */
-  .usecases-section { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 40px 48px; }
-  .usecases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 24px; }
-  .usecase-tile { background: #f8faff; border: 1px solid #e8edf8; border-radius: 12px; padding: 18px 16px; text-align: center; }
-  .usecase-icon { font-size: 24px; margin-bottom: 8px; }
-  .usecase-label { font-size: 12px; font-weight: 600; color: #334155; line-height: 1.4; }
+      /* USE CASES */
+      .usecases-section {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 40px 48px;
+      }
+      .usecases-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        margin-top: 24px;
+      }
+      .usecase-tile {
+        background: #f8faff;
+        border: 1px solid #e8edf8;
+        border-radius: 12px;
+        padding: 18px 16px;
+        text-align: center;
+      }
+      .usecase-icon {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+      .usecase-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #334155;
+        line-height: 1.4;
+      }
 
-  /* SECURITY */
-  .security-section { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 16px; padding: 36px 48px; }
-  .security-section .section-eyebrow { color: #059669; }
-  .security-section .section-heading { color: #065f46; }
-  .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
-  .security-item { display: flex; align-items: flex-start; gap: 12px; background: #fff; border: 1px solid #d1fae5; border-radius: 12px; padding: 16px; }
-  .security-icon { font-size: 22px; flex-shrink: 0; }
-  .security-item-title { font-size: 13px; font-weight: 600; color: #065f46; margin-bottom: 4px; }
-  .security-item-desc { font-size: 12px; color: #047857; line-height: 1.5; }
+      /* SECURITY */
+      .security-section {
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-radius: 16px;
+        padding: 36px 48px;
+      }
+      .security-section .section-eyebrow {
+        color: #059669;
+      }
+      .security-section .section-heading {
+        color: #065f46;
+      }
+      .security-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 20px;
+      }
+      .security-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        background: #fff;
+        border: 1px solid #d1fae5;
+        border-radius: 12px;
+        padding: 16px;
+      }
+      .security-icon {
+        font-size: 22px;
+        flex-shrink: 0;
+      }
+      .security-item-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #065f46;
+        margin-bottom: 4px;
+      }
+      .security-item-desc {
+        font-size: 12px;
+        color: #047857;
+        line-height: 1.5;
+      }
 
-  /* COMING SOON */
-  .coming-section {
-    background: linear-gradient(135deg, #2d1b69 0%, #1e3a8a 100%);
-    border-radius: 16px; padding: 40px 48px;
-  }
-  .coming-badge {
-    display: inline-block; background: rgba(251,191,36,0.2);
-    border: 1px solid rgba(251,191,36,0.4); border-radius: 100px;
-    padding: 5px 14px; font-size: 11px; color: #fbbf24;
-    font-weight: 600; margin-bottom: 16px; letter-spacing: 1px;
-  }
-  .coming-heading { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 12px; }
-  .coming-body { font-size: 14px; color: #94a3b8; line-height: 1.7; max-width: 540px; }
-  .voice-waves { display: flex; align-items: flex-end; gap: 4px; margin-top: 24px; height: 40px; }
-  .wave-bar { width: 6px; border-radius: 3px; background: linear-gradient(to top, #6366f1, #38bdf8); animation: wave 1.2s ease-in-out infinite; }
-  @keyframes wave { 0%, 100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
-  .voice-label { font-size: 12px; color: #4f46e5; margin-top: 8px; font-weight: 500; }
+      /* COMING SOON */
+      .coming-section {
+        background: linear-gradient(135deg, #2d1b69 0%, #1e3a8a 100%);
+        border-radius: 16px;
+        padding: 40px 48px;
+      }
+      .coming-badge {
+        display: inline-block;
+        background: rgba(251, 191, 36, 0.2);
+        border: 1px solid rgba(251, 191, 36, 0.4);
+        border-radius: 100px;
+        padding: 5px 14px;
+        font-size: 11px;
+        color: #fbbf24;
+        font-weight: 600;
+        margin-bottom: 16px;
+        letter-spacing: 1px;
+      }
+      .coming-heading {
+        font-size: 26px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+      .coming-body {
+        font-size: 14px;
+        color: #94a3b8;
+        line-height: 1.7;
+        max-width: 540px;
+      }
+      .voice-waves {
+        display: flex;
+        align-items: flex-end;
+        gap: 4px;
+        margin-top: 24px;
+        height: 40px;
+      }
+      .wave-bar {
+        width: 6px;
+        border-radius: 3px;
+        background: linear-gradient(to top, #6366f1, #38bdf8);
+        animation: wave 1.2s ease-in-out infinite;
+      }
+      @keyframes wave {
+        0%,
+        100% {
+          transform: scaleY(0.4);
+        }
+        50% {
+          transform: scaleY(1);
+        }
+      }
+      .voice-label {
+        font-size: 12px;
+        color: #4f46e5;
+        margin-top: 8px;
+        font-weight: 500;
+      }
 
-  /* BACK COVER */
-  .back-cover {
-    background: linear-gradient(135deg, #0f1d3a 0%, #1a2f6e 60%, #2d1b69 100%);
-    border-radius: 16px; padding: 48px 48px 40px; position: relative; overflow: hidden;
-  }
-  .back-logo { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 24px; letter-spacing: -0.5px; }
-  .back-logo span { background: linear-gradient(90deg, #a78bfa, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .back-tagline { font-size: 26px; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: 16px; max-width: 500px; }
-  .back-sub { font-size: 14px; color: #94a3b8; line-height: 1.7; max-width: 540px; margin-bottom: 32px; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
-  .cta-btn {
-    display: inline-block; background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    color: #fff; font-size: 14px; font-weight: 600;
-    border-radius: 100px; padding: 14px 28px; text-decoration: none;
-  }
-  .cta-secondary {
-    display: inline-block; background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.2); color: #e2e8f0;
-    font-size: 14px; font-weight: 500; border-radius: 100px;
-    padding: 14px 24px; text-decoration: none;
-  }
-  .contact-row {
-    display: flex; flex-wrap: wrap; gap: 24px; margin-top: 36px;
-    padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);
-  }
-  .contact-item { font-size: 12px; color: #64748b; }
-  .contact-item strong { color: #94a3b8; display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+      /* BACK COVER */
+      .back-cover {
+        background: linear-gradient(
+          135deg,
+          #0f1d3a 0%,
+          #1a2f6e 60%,
+          #2d1b69 100%
+        );
+        border-radius: 16px;
+        padding: 48px 48px 40px;
+        position: relative;
+        overflow: hidden;
+      }
+      .back-logo {
+        font-size: 22px;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 24px;
+        letter-spacing: -0.5px;
+      }
+      .back-logo span {
+        background: linear-gradient(90deg, #a78bfa, #38bdf8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .back-tagline {
+        font-size: 26px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.3;
+        margin-bottom: 16px;
+        max-width: 500px;
+      }
+      .back-sub {
+        font-size: 14px;
+        color: #94a3b8;
+        line-height: 1.7;
+        max-width: 540px;
+        margin-bottom: 32px;
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .cta-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 100px;
+        padding: 14px 28px;
+        text-decoration: none;
+      }
+      .cta-secondary {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #e2e8f0;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 100px;
+        padding: 14px 24px;
+        text-decoration: none;
+      }
+      .contact-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-top: 36px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .contact-item {
+        font-size: 12px;
+        color: #64748b;
+      }
+      .contact-item strong {
+        color: #94a3b8;
+        display: block;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
+      }
 
-  @media (max-width: 640px) {
-    .cover-grid, .dashboard-grid, .benefits-section, .security-grid { grid-template-columns: 1fr; }
-    .steps-row { grid-template-columns: repeat(2, 1fr); }
-    .cover-chat-mockup { min-width: unset; max-width: 100%; }
-    body { padding: 16px 8px; }
-    .cover, .intro-band, .features-section, .how-section, .benefit-left, .benefit-right,
-    .dashboard-section, .usecases-section, .security-section, .coming-section, .back-cover {
-      padding: 28px 24px;
-    }
-    .benefit-left { border-radius: 16px; }
-    .benefit-right { border-radius: 16px; }
-  }
-</style>
-</head>
-<body>
-<div class="brochure">
-
-  <!-- FRONT COVER -->
-  <div class="cover">
-    <div class="cover-bg-orb" style="width:500px;height:500px;right:-150px;top:-200px;"></div>
-    <div class="cover-bg-orb" style="width:300px;height:300px;left:-80px;bottom:-80px;background:radial-gradient(circle,rgba(56,189,248,0.15) 0%,transparent 70%);"></div>
-    <div class="cover-grid">
-      <div>
-        <div class="cover-badge"><span class="cover-dot"></span> AI-Powered Business Assistant</div>
-        <h1 class="cover-title">Meet <span>Assistly</span></h1>
-        <p class="cover-tagline">Turn every website visitor into an <strong>informed customer.</strong><br>Instant answers. Easy bookings. Smarter conversations.</p>
-        <div class="cover-pills">
-          <span class="cover-pill">Customer Support</span>
-          <span class="cover-pill">Appointment Booking</span>
-          <span class="cover-pill">Smart FAQ Answers</span>
-          <span class="cover-pill">24/7 Availability</span>
-        </div>
-        <p style="font-size:13px;color:#64748b;line-height:1.7;max-width:460px;">Assistly is an AI-powered customer assistant that helps businesses respond instantly to customer questions, guide users through services, and book appointments directly through chat.</p>
-      </div>
-      <div class="cover-chat-mockup">
-        <div class="chat-header">
-          <div class="chat-avatar">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="rgba(255,255,255,0.2)"/><path d="M8 12h8M12 8v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
+      @media (max-width: 640px) {
+        .cover-grid,
+        .dashboard-grid,
+        .benefits-section,
+        .security-grid {
+          grid-template-columns: 1fr;
+        }
+        .steps-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .cover-chat-mockup {
+          min-width: unset;
+          max-width: 100%;
+        }
+        body {
+          padding: 16px 8px;
+        }
+        .cover,
+        .intro-band,
+        .features-section,
+        .how-section,
+        .benefit-left,
+        .benefit-right,
+        .dashboard-section,
+        .usecases-section,
+        .security-section,
+        .coming-section,
+        .back-cover {
+          padding: 28px 24px;
+        }
+        .benefit-left {
+          border-radius: 16px;
+        }
+        .benefit-right {
+          border-radius: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="brochure">
+      <!-- FRONT COVER -->
+      <div class="cover">
+        <div
+          class="cover-bg-orb"
+          style="width: 500px; height: 500px; right: -150px; top: -200px"
+        ></div>
+        <div
+          class="cover-bg-orb"
+          style="
+            width: 300px;
+            height: 300px;
+            left: -80px;
+            bottom: -80px;
+            background: radial-gradient(
+              circle,
+              rgba(56, 189, 248, 0.15) 0%,
+              transparent 70%
+            );
+          "
+        ></div>
+        <div class="cover-grid">
           <div>
-            <div class="chat-name">Assistly</div>
-            <div class="chat-status">● Online now</div>
+            <div class="cover-badge">
+              <span class="cover-dot"></span> AI-Powered Business Assistant
+            </div>
+            <h1 class="cover-title">Meet <span>Assistly</span></h1>
+            <p class="cover-tagline">
+              Turn every website visitor into an
+              <strong>informed customer.</strong><br />Instant answers. Easy
+              bookings. Smarter conversations.
+            </p>
+            <div class="cover-pills">
+              <span class="cover-pill">Customer Support</span>
+              <span class="cover-pill">Appointment Booking</span>
+              <span class="cover-pill">Smart FAQ Answers</span>
+              <span class="cover-pill">24/7 Availability</span>
+            </div>
+            <p
+              style="
+                font-size: 13px;
+                color: #64748b;
+                line-height: 1.7;
+                max-width: 460px;
+              "
+            >
+              Assistly is an AI-powered customer assistant that helps businesses
+              respond instantly to customer questions, guide users through
+              services, and book appointments directly through chat.
+            </p>
           </div>
-        </div>
-        <div class="chat-bubble chat-bot">Hi! I can answer questions or help you book an appointment. What do you need?</div>
-        <div class="chat-bubble chat-user">I'd like to schedule a consultation</div>
-        <div class="chat-bubble chat-bot">Great! Pick a time that works for you:</div>
-        <div class="chat-slots">
-          <div class="chat-slot selected">Mon 10:00</div>
-          <div class="chat-slot">Mon 14:00</div>
-          <div class="chat-slot">Tue 11:00</div>
-          <div class="chat-slot">Wed 9:00</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- INTRO -->
-  <div class="intro-band">
-    <div class="section-eyebrow">What is Assistly</div>
-    <h2 class="section-heading">The smarter way to handle <em>customer communication</em></h2>
-    <p class="section-body">Assistly is designed to make customer communication faster, easier, and more reliable. It understands user questions, responds using your business information, and helps customers take action instantly. Whether someone wants to know about your services, pricing, policies, availability, or booking process — Assistly provides the right information in a simple conversational format. Available 24/7 on your website, with future voice-call support in development.</p>
-    <div class="stat-row">
-      <div class="stat-box"><div class="stat-num">24/7</div><div class="stat-label">Always available</div></div>
-      <div class="stat-box"><div class="stat-num">&lt; 2s</div><div class="stat-label">Response time</div></div>
-      <div class="stat-box"><div class="stat-num">0</div><div class="stat-label">Manual replies needed</div></div>
-    </div>
-  </div>
-
-  <!-- FEATURES -->
-  <div class="features-section">
-    <div class="section-eyebrow">What Assistly can do</div>
-    <h2 class="section-heading">Everything your front desk does — <em>automated</em></h2>
-    <div class="features-grid">
-      <div class="feature-card"><div class="feature-icon icon-purple">💬</div><div class="feature-title">AI-Powered Support</div><div class="feature-desc">Answers customer questions in real time using your approved business information.</div></div>
-      <div class="feature-card"><div class="feature-icon icon-blue">📚</div><div class="feature-title">Smart Knowledge Base</div><div class="feature-desc">Upload FAQs, brochures, pricing sheets, and policies — Assistly learns from them instantly.</div></div>
-      <div class="feature-card"><div class="feature-icon icon-teal">📅</div><div class="feature-title">In-Chat Booking</div><div class="feature-desc">Customers book appointments directly in conversation — no separate forms needed.</div></div>
-      <div class="feature-card"><div class="feature-icon icon-purple">🕐</div><div class="feature-title">Clickable Time Slots</div><div class="feature-desc">Available slots appear as tappable buttons for a friction-free booking experience.</div></div>
-      <div class="feature-card"><div class="feature-icon icon-amber">📊</div><div class="feature-title">Admin Dashboard</div><div class="feature-desc">Manage documents, appointments, available slots, and business info from one place.</div></div>
-      <div class="feature-card"><div class="feature-icon icon-rose">🔗</div><div class="feature-title">Easy Website Embed</div><div class="feature-desc">Add Assistly to any website with a lightweight chat widget — no developer needed.</div></div>
-      <div class="feature-card"><div class="feature-icon icon-teal">📁</div><div class="feature-title">Document Upload</div><div class="feature-desc">Supports PDF, DOCX, TXT files and FAQs. Updates reflect immediately in responses.</div></div>
-      <div class="feature-card"><div class="feature-icon icon-blue">✉️</div><div class="feature-title">Booking Confirmations</div><div class="feature-desc">Sends confirmations via configured channels — email, SMS, or WhatsApp.</div></div>
-    </div>
-  </div>
-
-  <!-- HOW IT WORKS -->
-  <div class="how-section">
-    <div class="how-eyebrow">How it works</div>
-    <h2 class="how-heading">7 steps from hello to booked</h2>
-    <div class="steps-row">
-      <div class="step"><div class="step-num">1</div><div class="step-title">Visitor opens chat</div><div class="step-desc">Chat widget appears on your website</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-title">Asks a question</div><div class="step-desc">About services, pricing, or booking</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-title">AI understands</div><div class="step-desc">Checks your knowledge base instantly</div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-title">Collects details</div><div class="step-desc">Name, phone, email — conversationally</div></div>
-      <div class="step"><div class="step-num">5</div><div class="step-title">Shows time slots</div><div class="step-desc">Clickable options, real availability</div></div>
-      <div class="step"><div class="step-num">6</div><div class="step-title">Customer confirms</div><div class="step-desc">Receives booking confirmation</div></div>
-      <div class="step"><div class="step-num">7</div><div class="step-title">Dashboard updated</div><div class="step-desc">Appointment appears for your team</div></div>
-    </div>
-  </div>
-
-  <!-- BENEFITS -->
-  <div class="benefits-section">
-    <div class="benefit-left">
-      <div class="section-eyebrow">Business benefits</div>
-      <h3 class="benefit-heading">For your team &amp; operations</h3>
-      <ul class="benefit-list">
-        <li><span class="benefit-check">✦</span> Respond instantly, even outside business hours</li>
-        <li><span class="benefit-check">✦</span> Reduce repetitive support workload</li>
-        <li><span class="benefit-check">✦</span> Improve lead capture and engagement</li>
-        <li><span class="benefit-check">✦</span> Centralize support, info, and booking</li>
-        <li><span class="benefit-check">✦</span> Reduce missed opportunities from slow responses</li>
-        <li><span class="benefit-check">✦</span> Make appointment booking frictionless</li>
-        <li><span class="benefit-check">✦</span> Create a modern, professional website experience</li>
-        <li><span class="benefit-check">✦</span> Help users find the right service faster</li>
-      </ul>
-    </div>
-    <div class="benefit-right">
-      <div class="section-eyebrow">Customer benefits</div>
-      <h3 class="benefit-heading">For your customers</h3>
-      <ul class="benefit-list">
-        <li><span class="benefit-check" style="color:#0ea5e9;">✦</span> No waiting for basic answers</li>
-        <li><span class="benefit-check" style="color:#0ea5e9;">✦</span> No searching across multiple web pages</li>
-        <li><span class="benefit-check" style="color:#0ea5e9;">✦</span> No complicated booking forms</li>
-        <li><span class="benefit-check" style="color:#0ea5e9;">✦</span> Clear appointment availability at a glance</li>
-        <li><span class="benefit-check" style="color:#0ea5e9;">✦</span> Simple chat-based communication</li>
-        <li><span class="benefit-check" style="color:#0ea5e9;">✦</span> Fast access to pricing, policies, and contact info</li>
-        <li><span class="benefit-check" style="color:#0ea5e9;">✦</span> Mobile-friendly experience</li>
-        <li><span class="benefit-check" style="color:#0ea5e9;">✦</span> Future voice-call support coming soon</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- DASHBOARD -->
-  <div class="dashboard-section">
-    <div class="dashboard-grid">
-      <div>
-        <div class="dashboard-eyebrow">Admin dashboard</div>
-        <h2 class="dashboard-heading">Full control at your fingertips</h2>
-        <p style="font-size:14px;color:#64748b;line-height:1.7;margin-bottom:16px;">Manage your knowledge base, view appointment bookings, update available slots, and track interactions — all from one clean dashboard.</p>
-        <div class="dash-point"><span>●</span> Appointment calendar &amp; history</div>
-        <div class="dash-point"><span>●</span> Document &amp; FAQ management</div>
-        <div class="dash-point"><span>●</span> Working hours &amp; timezone settings</div>
-        <div class="dash-point"><span>●</span> No technical knowledge required</div>
-      </div>
-      <div class="dash-mockup">
-        <div class="dash-topbar">
-          <div class="dash-dot" style="background:#ef4444;"></div>
-          <div class="dash-dot" style="background:#fbbf24;"></div>
-          <div class="dash-dot" style="background:#34d399;"></div>
-          <span class="dash-title-bar">Assistly — Admin Dashboard</span>
-        </div>
-        <div class="dash-content">
-          <div class="dash-sidebar">
-            <div class="dash-nav-item active">📅 Appointments</div>
-            <div class="dash-nav-item">📚 Knowledge Base</div>
-            <div class="dash-nav-item">💬 Conversations</div>
-            <div class="dash-nav-item">⚙️ Settings</div>
-          </div>
-          <div class="dash-main">
-            <div class="dash-stat-row">
-              <div class="dash-stat"><div class="dash-stat-num">28</div><div class="dash-stat-label">This week</div></div>
-              <div class="dash-stat"><div class="dash-stat-num" style="color:#34d399;">94%</div><div class="dash-stat-label">Confirmed</div></div>
-              <div class="dash-stat"><div class="dash-stat-num" style="color:#a78bfa;">147</div><div class="dash-stat-label">Total chats</div></div>
+          <div class="cover-chat-mockup">
+            <div class="chat-header">
+              <div class="chat-avatar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" fill="rgba(255,255,255,0.2)" />
+                  <path
+                    d="M8 12h8M12 8v8"
+                    stroke="#fff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
+              <div>
+                <div class="chat-name">Assistly</div>
+                <div class="chat-status">● Online now</div>
+              </div>
             </div>
-            <div class="dash-appt-row">
-              <div><div class="dash-appt-name">Priya Sharma</div><div class="dash-appt-time">Mon, 10:00 AM</div></div>
-              <span class="dash-badge badge-confirmed">Confirmed</span>
+            <div class="chat-bubble chat-bot">
+              Hi! I can answer questions or help you book an appointment. What
+              do you need?
             </div>
-            <div class="dash-appt-row">
-              <div><div class="dash-appt-name">Rahul Mehta</div><div class="dash-appt-time">Mon, 2:00 PM</div></div>
-              <span class="dash-badge badge-pending">Pending</span>
+            <div class="chat-bubble chat-user">
+              I'd like to schedule a consultation
             </div>
-            <div class="dash-appt-row">
-              <div><div class="dash-appt-name">Anita Gupta</div><div class="dash-appt-time">Tue, 11:30 AM</div></div>
-              <span class="dash-badge badge-confirmed">Confirmed</span>
+            <div class="chat-bubble chat-bot">
+              Great! Pick a time that works for you:
+            </div>
+            <div class="chat-slots">
+              <div class="chat-slot selected">Mon 10:00</div>
+              <div class="chat-slot">Mon 14:00</div>
+              <div class="chat-slot">Tue 11:00</div>
+              <div class="chat-slot">Wed 9:00</div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- USE CASES -->
-  <div class="usecases-section">
-    <div class="section-eyebrow">Who uses Assistly</div>
-    <h2 class="section-heading">Built for every <em>service business</em></h2>
-    <div class="usecases-grid">
-      <div class="usecase-tile"><div class="usecase-icon">🏥</div><div class="usecase-label">Clinics &amp; Healthcare</div></div>
-      <div class="usecase-tile"><div class="usecase-icon">💇</div><div class="usecase-label">Salons &amp; Spas</div></div>
-      <div class="usecase-tile"><div class="usecase-icon">🎓</div><div class="usecase-label">Education &amp; Coaching</div></div>
-      <div class="usecase-tile"><div class="usecase-icon">🏡</div><div class="usecase-label">Real Estate</div></div>
-      <div class="usecase-tile"><div class="usecase-icon">⚖️</div><div class="usecase-label">Professional Services</div></div>
-      <div class="usecase-tile"><div class="usecase-icon">🔧</div><div class="usecase-label">Repair &amp; Maintenance</div></div>
-      <div class="usecase-tile"><div class="usecase-icon">🧘</div><div class="usecase-label">Wellness Centers</div></div>
-      <div class="usecase-tile"><div class="usecase-icon">🏪</div><div class="usecase-label">Local Businesses</div></div>
-    </div>
-  </div>
+      <!-- INTRO -->
+      <div class="intro-band">
+        <div class="section-eyebrow">What is Assistly</div>
+        <h2 class="section-heading">
+          The smarter way to handle <em>customer communication</em>
+        </h2>
+        <p class="section-body">
+          Assistly is designed to make customer communication faster, easier,
+          and more reliable. It understands user questions, responds using your
+          business information, and helps customers take action instantly.
+          Whether someone wants to know about your services, pricing, policies,
+          availability, or booking process — Assistly provides the right
+          information in a simple conversational format. Available 24/7 on your
+          website, with future voice-call support in development.
+        </p>
+        <div class="stat-row">
+          <div class="stat-box">
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">Always available</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">&lt; 2s</div>
+            <div class="stat-label">Response time</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Manual replies needed</div>
+          </div>
+        </div>
+      </div>
 
-  <!-- SECURITY -->
-  <div class="security-section">
-    <div class="section-eyebrow">Security &amp; reliability</div>
-    <h2 class="section-heading">Built with trust at the core</h2>
-    <p class="section-body" style="color:#047857;">Assistly is designed with controlled access and business-specific information handling. The assistant responds only using information you provide, ensuring customers receive relevant and appropriate answers.</p>
-    <div class="security-grid">
-      <div class="security-item"><div class="security-icon">🔒</div><div><div class="security-item-title">Secure login access</div><div class="security-item-desc">Management features protected through secure authentication for your team only.</div></div></div>
-      <div class="security-item"><div class="security-icon">🎯</div><div><div class="security-item-title">Business-specific responses</div><div class="security-item-desc">Assistly only answers from your uploaded content — never generic or off-topic.</div></div></div>
-      <div class="security-item"><div class="security-icon">📋</div><div><div class="security-item-title">Full content control</div><div class="security-item-desc">Add, edit, or remove documents from the dashboard at any time.</div></div></div>
-      <div class="security-item"><div class="security-icon">🛡️</div><div><div class="security-item-title">Reliable availability</div><div class="security-item-desc">Built to remain accessible and responsive for your customers around the clock.</div></div></div>
-    </div>
-  </div>
+      <!-- FEATURES -->
+      <div class="features-section">
+        <div class="section-eyebrow">What Assistly can do</div>
+        <h2 class="section-heading">
+          Everything your front desk does — <em>automated</em>
+        </h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon icon-purple">💬</div>
+            <div class="feature-title">AI-Powered Support</div>
+            <div class="feature-desc">
+              Answers customer questions in real time using your approved
+              business information.
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-blue">📚</div>
+            <div class="feature-title">Smart Knowledge Base</div>
+            <div class="feature-desc">
+              Upload FAQs, brochures, pricing sheets, and policies — Assistly
+              learns from them instantly.
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-teal">📅</div>
+            <div class="feature-title">In-Chat Booking</div>
+            <div class="feature-desc">
+              Customers book appointments directly in conversation — no separate
+              forms needed.
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-purple">🕐</div>
+            <div class="feature-title">Clickable Time Slots</div>
+            <div class="feature-desc">
+              Available slots appear as tappable buttons for a friction-free
+              booking experience.
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-amber">📊</div>
+            <div class="feature-title">Admin Dashboard</div>
+            <div class="feature-desc">
+              Manage documents, appointments, available slots, and business info
+              from one place.
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-rose">🔗</div>
+            <div class="feature-title">Easy Website Embed</div>
+            <div class="feature-desc">
+              Add Assistly to any website with a lightweight chat widget — no
+              developer needed.
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-teal">📁</div>
+            <div class="feature-title">Document Upload</div>
+            <div class="feature-desc">
+              Supports TXT files and FAQs. Updates reflect
+              immediately in responses.
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-blue">✉️</div>
+            <div class="feature-title">Booking Confirmations</div>
+            <div class="feature-desc">
+              Sends confirmations via configured channels — email, SMS, or
+              WhatsApp.
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <!-- COMING SOON -->
-  <div class="coming-section">
-    <div class="coming-badge">COMING SOON</div>
-    <h2 class="coming-heading">Voice-Based AI Assistance</h2>
-    <p class="coming-body">Assistly is being extended with voice call communication, allowing customers to speak naturally and receive answers without typing. Customers will ask questions, get service information, and receive guidance through spoken conversation — making the assistant even more accessible for users who prefer phone-style interaction.</p>
-    <div class="voice-waves">
-      <div class="wave-bar" style="height:16px;animation-delay:0s;"></div>
-      <div class="wave-bar" style="height:28px;animation-delay:0.1s;"></div>
-      <div class="wave-bar" style="height:38px;animation-delay:0.2s;"></div>
-      <div class="wave-bar" style="height:22px;animation-delay:0.3s;"></div>
-      <div class="wave-bar" style="height:35px;animation-delay:0.4s;"></div>
-      <div class="wave-bar" style="height:18px;animation-delay:0.5s;"></div>
-      <div class="wave-bar" style="height:30px;animation-delay:0.6s;"></div>
-      <div class="wave-bar" style="height:40px;animation-delay:0.7s;"></div>
-      <div class="wave-bar" style="height:24px;animation-delay:0.8s;"></div>
-      <div class="wave-bar" style="height:20px;animation-delay:0.9s;"></div>
-      <div class="wave-bar" style="height:36px;animation-delay:1.0s;"></div>
-      <div class="wave-bar" style="height:14px;animation-delay:1.1s;"></div>
-    </div>
-    <p class="voice-label">Voice feature launching soon — sign up to be notified</p>
-  </div>
+      <!-- HOW IT WORKS -->
+      <div class="how-section">
+        <div class="how-eyebrow">How it works</div>
+        <h2 class="how-heading">7 steps from hello to booked</h2>
+        <div class="steps-row">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-title">Visitor opens chat</div>
+            <div class="step-desc">Chat widget appears on your website</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-title">Asks a question</div>
+            <div class="step-desc">About services, pricing, or booking</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-title">AI understands</div>
+            <div class="step-desc">Checks your knowledge base instantly</div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-title">Collects details</div>
+            <div class="step-desc">Name, phone, email — conversationally</div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-title">Shows time slots</div>
+            <div class="step-desc">Clickable options, real availability</div>
+          </div>
+          <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-title">Customer confirms</div>
+            <div class="step-desc">Receives booking confirmation</div>
+          </div>
+          <div class="step">
+            <div class="step-num">7</div>
+            <div class="step-title">Dashboard updated</div>
+            <div class="step-desc">Appointment appears for your team</div>
+          </div>
+        </div>
+      </div>
 
-  <!-- BACK COVER / CTA -->
-  <div class="back-cover">
-    <div class="cover-bg-orb" style="width:400px;height:400px;right:-100px;top:-100px;"></div>
-    <div class="back-logo">Assistly<span>.</span></div>
-    <h2 class="back-tagline">Make customer support faster. Make booking easier. Make your website smarter.</h2>
-    <p class="back-sub">Assistly brings customer support, business information, and appointment booking together in one intelligent assistant. From answering questions to helping users book available slots, it creates a smoother experience for customers and a more efficient workflow for your team. It is more than a chatbot — it is a digital front-desk assistant built for modern businesses.</p>
-    <div class="cta-row">
-      <a href="#" class="cta-btn">Get Assistly for your business</a>
-      <a href="#" class="cta-secondary">Request a demo</a>
-    </div>
-    <div class="contact-row">
-      <div class="contact-item"><strong>Product</strong>assistly.ai</div>
-      <div class="contact-item"><strong>Platform</strong>Web · Mobile · API</div>
-      <div class="contact-item"><strong>Availability</strong>Worldwide</div>
-      <div class="contact-item"><strong>Support</strong>24/7 via dashboard</div>
-    </div>
-  </div>
+      <!-- BENEFITS -->
+      <div class="benefits-section">
+        <div class="benefit-left">
+          <div class="section-eyebrow">Business benefits</div>
+          <h3 class="benefit-heading">For your team &amp; operations</h3>
+          <ul class="benefit-list">
+            <li>
+              <span class="benefit-check">✦</span> Respond instantly, even
+              outside business hours
+            </li>
+            <li>
+              <span class="benefit-check">✦</span> Reduce repetitive support
+              workload
+            </li>
+            <li>
+              <span class="benefit-check">✦</span> Improve lead capture and
+              engagement
+            </li>
+            <li>
+              <span class="benefit-check">✦</span> Centralize support, info, and
+              booking
+            </li>
+            <li>
+              <span class="benefit-check">✦</span> Reduce missed opportunities
+              from slow responses
+            </li>
+            <li>
+              <span class="benefit-check">✦</span> Make appointment booking
+              frictionless
+            </li>
+            <li>
+              <span class="benefit-check">✦</span> Create a modern, professional
+              website experience
+            </li>
+            <li>
+              <span class="benefit-check">✦</span> Help users find the right
+              service faster
+            </li>
+          </ul>
+        </div>
+        <div class="benefit-right">
+          <div class="section-eyebrow">Customer benefits</div>
+          <h3 class="benefit-heading">For your customers</h3>
+          <ul class="benefit-list">
+            <li>
+              <span class="benefit-check" style="color: #0ea5e9">✦</span> No
+              waiting for basic answers
+            </li>
+            <li>
+              <span class="benefit-check" style="color: #0ea5e9">✦</span> No
+              searching across multiple web pages
+            </li>
+            <li>
+              <span class="benefit-check" style="color: #0ea5e9">✦</span> No
+              complicated booking forms
+            </li>
+            <li>
+              <span class="benefit-check" style="color: #0ea5e9">✦</span> Clear
+              appointment availability at a glance
+            </li>
+            <li>
+              <span class="benefit-check" style="color: #0ea5e9">✦</span> Simple
+              chat-based communication
+            </li>
+            <li>
+              <span class="benefit-check" style="color: #0ea5e9">✦</span> Fast
+              access to pricing, policies, and contact info
+            </li>
+            <li>
+              <span class="benefit-check" style="color: #0ea5e9">✦</span>
+              Mobile-friendly experience
+            </li>
+            <li>
+              <span class="benefit-check" style="color: #0ea5e9">✦</span> Future
+              voice-call support coming soon
+            </li>
+          </ul>
+        </div>
+      </div>
 
-</div>
-</body>
+      <!-- DASHBOARD -->
+      <div class="dashboard-section">
+        <div class="dashboard-grid">
+          <div>
+            <div class="dashboard-eyebrow">Admin dashboard</div>
+            <h2 class="dashboard-heading">Full control at your fingertips</h2>
+            <p
+              style="
+                font-size: 14px;
+                color: #64748b;
+                line-height: 1.7;
+                margin-bottom: 16px;
+              "
+            >
+              Manage your knowledge base, view appointment bookings, update
+              available slots, and track interactions — all from one clean
+              dashboard.
+            </p>
+            <div class="dash-point">
+              <span>●</span> Appointment calendar &amp; history
+            </div>
+            <div class="dash-point">
+              <span>●</span> Document &amp; FAQ management
+            </div>
+            <div class="dash-point">
+              <span>●</span> Working hours &amp; timezone settings
+            </div>
+            <div class="dash-point">
+              <span>●</span> No technical knowledge required
+            </div>
+          </div>
+          <div class="dash-mockup">
+            <div class="dash-topbar">
+              <div class="dash-dot" style="background: #ef4444"></div>
+              <div class="dash-dot" style="background: #fbbf24"></div>
+              <div class="dash-dot" style="background: #34d399"></div>
+              <span class="dash-title-bar">Assistly — Admin Dashboard</span>
+            </div>
+            <div class="dash-content">
+              <div class="dash-sidebar">
+                <div class="dash-nav-item active">📅 Appointments</div>
+                <div class="dash-nav-item">📚 Knowledge Base</div>
+                <div class="dash-nav-item">💬 Conversations</div>
+                <div class="dash-nav-item">⚙️ Settings</div>
+              </div>
+              <div class="dash-main">
+                <div class="dash-stat-row">
+                  <div class="dash-stat">
+                    <div class="dash-stat-num">28</div>
+                    <div class="dash-stat-label">This week</div>
+                  </div>
+                  <div class="dash-stat">
+                    <div class="dash-stat-num" style="color: #34d399">94%</div>
+                    <div class="dash-stat-label">Confirmed</div>
+                  </div>
+                  <div class="dash-stat">
+                    <div class="dash-stat-num" style="color: #a78bfa">147</div>
+                    <div class="dash-stat-label">Total chats</div>
+                  </div>
+                </div>
+                <div class="dash-appt-row">
+                  <div>
+                    <div class="dash-appt-name">Priya Sharma</div>
+                    <div class="dash-appt-time">Mon, 10:00 AM</div>
+                  </div>
+                  <span class="dash-badge badge-confirmed">Confirmed</span>
+                </div>
+                <div class="dash-appt-row">
+                  <div>
+                    <div class="dash-appt-name">Rahul Mehta</div>
+                    <div class="dash-appt-time">Mon, 2:00 PM</div>
+                  </div>
+                  <span class="dash-badge badge-pending">Pending</span>
+                </div>
+                <div class="dash-appt-row">
+                  <div>
+                    <div class="dash-appt-name">Anita Gupta</div>
+                    <div class="dash-appt-time">Tue, 11:30 AM</div>
+                  </div>
+                  <span class="dash-badge badge-confirmed">Confirmed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- USE CASES -->
+      <div class="usecases-section">
+        <div class="section-eyebrow">Who uses Assistly</div>
+        <h2 class="section-heading">
+          Built for every <em>service business</em>
+        </h2>
+        <div class="usecases-grid">
+          <div class="usecase-tile">
+            <div class="usecase-icon">🏥</div>
+            <div class="usecase-label">Clinics &amp; Healthcare</div>
+          </div>
+          <div class="usecase-tile">
+            <div class="usecase-icon">💇</div>
+            <div class="usecase-label">Salons &amp; Spas</div>
+          </div>
+          <div class="usecase-tile">
+            <div class="usecase-icon">🎓</div>
+            <div class="usecase-label">Education &amp; Coaching</div>
+          </div>
+          <div class="usecase-tile">
+            <div class="usecase-icon">🏡</div>
+            <div class="usecase-label">Real Estate</div>
+          </div>
+          <div class="usecase-tile">
+            <div class="usecase-icon">⚖️</div>
+            <div class="usecase-label">Professional Services</div>
+          </div>
+          <div class="usecase-tile">
+            <div class="usecase-icon">🔧</div>
+            <div class="usecase-label">Repair &amp; Maintenance</div>
+          </div>
+          <div class="usecase-tile">
+            <div class="usecase-icon">🧘</div>
+            <div class="usecase-label">Wellness Centers</div>
+          </div>
+          <div class="usecase-tile">
+            <div class="usecase-icon">🏪</div>
+            <div class="usecase-label">Local Businesses</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECURITY -->
+      <div class="security-section">
+        <div class="section-eyebrow">Security &amp; reliability</div>
+        <h2 class="section-heading">Built with trust at the core</h2>
+        <p class="section-body" style="color: #047857">
+          Assistly is designed with controlled access and business-specific
+          information handling. The assistant responds only using information
+          you provide, ensuring customers receive relevant and appropriate
+          answers.
+        </p>
+        <div class="security-grid">
+          <div class="security-item">
+            <div class="security-icon">🔒</div>
+            <div>
+              <div class="security-item-title">Secure login access</div>
+              <div class="security-item-desc">
+                Management features protected through secure authentication for
+                your team only.
+              </div>
+            </div>
+          </div>
+          <div class="security-item">
+            <div class="security-icon">🎯</div>
+            <div>
+              <div class="security-item-title">Business-specific responses</div>
+              <div class="security-item-desc">
+                Assistly only answers from your uploaded content — never generic
+                or off-topic.
+              </div>
+            </div>
+          </div>
+          <div class="security-item">
+            <div class="security-icon">📋</div>
+            <div>
+              <div class="security-item-title">Full content control</div>
+              <div class="security-item-desc">
+                Add, edit, or remove documents from the dashboard at any time.
+              </div>
+            </div>
+          </div>
+          <div class="security-item">
+            <div class="security-icon">🛡️</div>
+            <div>
+              <div class="security-item-title">Reliable availability</div>
+              <div class="security-item-desc">
+                Built to remain accessible and responsive for your customers
+                around the clock.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMING SOON -->
+      <div class="coming-section">
+        <div class="coming-badge">COMING SOON</div>
+        <h2 class="coming-heading">Voice-Based AI Assistance</h2>
+        <p class="coming-body">
+          Assistly is being extended with voice call communication, allowing
+          customers to speak naturally and receive answers without typing.
+          Customers will ask questions, get service information, and receive
+          guidance through spoken conversation — making the assistant even more
+          accessible for users who prefer phone-style interaction.
+        </p>
+        <div class="voice-waves">
+          <div class="wave-bar" style="height: 16px; animation-delay: 0s"></div>
+          <div
+            class="wave-bar"
+            style="height: 28px; animation-delay: 0.1s"
+          ></div>
+          <div
+            class="wave-bar"
+            style="height: 38px; animation-delay: 0.2s"
+          ></div>
+          <div
+            class="wave-bar"
+            style="height: 22px; animation-delay: 0.3s"
+          ></div>
+          <div
+            class="wave-bar"
+            style="height: 35px; animation-delay: 0.4s"
+          ></div>
+          <div
+            class="wave-bar"
+            style="height: 18px; animation-delay: 0.5s"
+          ></div>
+          <div
+            class="wave-bar"
+            style="height: 30px; animation-delay: 0.6s"
+          ></div>
+          <div
+            class="wave-bar"
+            style="height: 40px; animation-delay: 0.7s"
+          ></div>
+          <div
+            class="wave-bar"
+            style="height: 24px; animation-delay: 0.8s"
+          ></div>
+          <div
+            class="wave-bar"
+            style="height: 20px; animation-delay: 0.9s"
+          ></div>
+          <div class="wave-bar" style="height: 36px; animation-delay: 1s"></div>
+          <div
+            class="wave-bar"
+            style="height: 14px; animation-delay: 1.1s"
+          ></div>
+        </div>
+        <p class="voice-label">
+          Voice feature launching soon — sign up to be notified
+        </p>
+      </div>
+
+      <!-- BACK COVER / CTA -->
+      <div class="back-cover">
+        <div
+          class="cover-bg-orb"
+          style="width: 400px; height: 400px; right: -100px; top: -100px"
+        ></div>
+        <div class="back-logo">Assistly<span>.</span></div>
+        <h2 class="back-tagline">
+          Make customer support faster. Make booking easier. Make your website
+          smarter.
+        </h2>
+        <p class="back-sub">
+          Assistly brings customer support, business information, and
+          appointment booking together in one intelligent assistant. From
+          answering questions to helping users book available slots, it creates
+          a smoother experience for customers and a more efficient workflow for
+          your team. It is more than a chatbot — it is a digital front-desk
+          assistant built for modern businesses.
+        </p>
+        <div class="cta-row">
+          <a href="#" class="cta-btn">Get Assistly for your business</a>
+          <a href="#" class="cta-secondary">Request a demo</a>
+        </div>
+        <div class="contact-row">
+          <div class="contact-item"><strong>Product</strong>assistly.ai</div>
+          <div class="contact-item">
+            <strong>Platform</strong>Web · Mobile · API
+          </div>
+          <div class="contact-item"><strong>Availability</strong>Worldwide</div>
+          <div class="contact-item">
+            <strong>Support</strong>24/7 via dashboard
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
